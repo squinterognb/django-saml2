@@ -5,3 +5,11 @@ https://medium.com/@dima.alexandru/okta-python-django-integration-for-sso-d10f88
 https://github.com/grafana/django-saml2-auth/blob/main/django_saml2_auth/tests/settings.py
 
 ## Use
+
+First, copy de `secrets/.env-template` as `secrets/.env` and replace the values.
+
+Next, run:
+
+<code>
+docker compose --env-file ./secrets/.env up --build
+</code>
