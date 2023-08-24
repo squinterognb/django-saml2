@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Take environment variables from .env file
 SECRETS_PATH_FILE = os.environ.get('SECRETS_PATH_FILE', None)
+print(SECRETS_PATH_FILE)
 environ.Env.read_env(SECRETS_PATH_FILE)
 
 # Quick-start development settings - unsuitable for production
@@ -207,12 +208,14 @@ SAML2_AUTH = {
     #'JWT_PUBLIC_KEY': '--- YOUR PUBLIC KEY ---',  # Public key to decode the signed JWT token
     #'JWT_EXP': 60,  # JWT expiry time in seconds
     #'FRONTEND_URL': 'https://myfrontendclient.com',  # Redirect URL for the client if you are using JWT auth with DRF. See explanation below
-    #'LOGIN_CASE_SENSITIVE': False,  # whether of not to get the user in case_sentive mode
-    #'AUTHN_REQUESTS_SIGNED': True, # Require each authentication request to be signed
+    'LOGIN_CASE_SENSITIVE': False,  # whether of not to get the user in case_sentive mode
+    'AUTHN_REQUESTS_SIGNED': False, # Require each authentication request to be signed
     #'LOGOUT_REQUESTS_SIGNED': True,  # Require each logout request to be signed
-    #'WANT_ASSERTIONS_SIGNED': True,  # Require each assertion to be signed
+    'WANT_ASSERTIONS_SIGNED': True,  # Require each assertion to be signed
     'WANT_RESPONSE_SIGNED': False,  # Require response to be signed
     #'ACCEPTED_TIME_DIFF': None,  # Accepted time difference between your server and the Identity Provider
-    'ALLOWED_REDIRECT_HOSTS': [os.environ.get("SAML2_AUTH_ALLOWED_REDIRECT_HOSTS")], # Allowed hosts to redirect to using the ?next parameter
+    'ALLOWED_REDIRECT_HOSTS': os.environ.get("SAML2_AUTH_ALLOWED_REDIRECT_HOSTS").split(","), # Allowed hosts to redirect to using the ?next parameter
     'TOKEN_REQUIRED': False,  # Whether or not to require the token parameter in the SAML assertion
 }
+
+CSRF_TRUSTED_ORIGINS = os.environ.get("SAML2_AUTH_ALLOWED_REDIRECT_HOSTS").split(",")

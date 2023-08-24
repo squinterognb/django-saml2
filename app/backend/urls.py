@@ -21,10 +21,10 @@ import django_saml2_auth.views
 urlpatterns = [
     path('', include(('public.urls', 'public'), namespace='public')),
     re_path(r'^sso/', include('django_saml2_auth.urls')),
-    re_path(r'^accounts/login/$', django_saml2_auth.views.signin),
-    re_path(r'^admin/login/$', django_saml2_auth.views.signin),
-    re_path(r'^accounts/logout/$', django_saml2_auth.views.signout),
-    re_path(r'^admin/logout/$', django_saml2_auth.views.signout),
+    #re_path(r'^accounts/login/$', django_saml2_auth.views.signin),
+    path('admin/login/', django_saml2_auth.views.signin),
+    #re_path(r'^accounts/logout/$', django_saml2_auth.views.signout),
+    #re_path(r'^admin/logout/$', django_saml2_auth.views.signout),
     path('private/', include(('private.urls', 'private'), namespace="private")),
     path('admin/', admin.site.urls),
 ]
